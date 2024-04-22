@@ -1,0 +1,169 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/Lunar/main/Library.lua"))(); 
+
+local flags = Library.Flags 
+
+local Menu = Library:Window({Size = UDim2.new(0,580,0,600)}) do 
+	-- // Rage
+	local aiming = Menu:Page({Name = "Rage", Weapons = true})
+
+    do
+        local Settings = aiming:Weapon({Icon = "rbxassetid://6031280882"})
+        local Visuals = aiming:Weapon({Icon = "rbxassetid://7300480952"})
+        --
+        local Main = Settings:Section({Name = "Main", Size = 330, Side = "Left"})
+        do
+            Main:Toggle(
+                {
+                    Name = "Enabled", 
+                    Flag = "Silent Enabled", 
+                    Risk = true
+                }
+            )
+            --
+            Main:Keybind(
+                {
+                    Name = "Key", 
+                    Flag = "Silent_Bind", 
+                    Mode = "Toggle" -- Toggle, Hold, Always
+                }
+            )
+            --
+            Main:Dropdown(
+                {
+                    Name = "Resolver Method", 
+                    Flag = "Resolver Method",
+                    Options = {"Recalculate Velocity", "Suppress Velocity", "Move Direction"},
+                    Default = "Recalculate Velocity"
+                }
+            )
+            --
+            Main:Textbox(
+                {
+                    Name = "Prediction", 
+                    Flag = "Manual Prediction Value", 
+                    Placeholder = "Prediction"
+                }
+            )
+            --
+            Main:Slider(
+                {
+                    Name = "Slide me", 
+                    Suffix = "%", 
+                    Flag = "Slider",
+                    Min = 0, -- What the slider starts 
+                    Max = 1000, -- What the slider ends at
+                    Default = 100, -- Default slider
+                    Decimals = 1 -- 1,2,3 the amount of decimal places
+                }
+            )
+            -- 
+            Main:Colorpicker(
+                {
+                    Name = "Drag Me!", 
+                    Default = Color3.fromRGB(255, 0, 0), 
+                    Flag = "Colorpicker",
+                    Callback = function()
+                        print(
+                            flags["Colorpicker"]["Color"],
+                            flags["Colorpicker"]["Transparency"]
+                        )
+                    end 
+                }
+            )
+            -- 
+            Main:Dropdown(
+                {
+                    Name = "Mutli-Dropdown",
+                    Flag = "Multi Dropdown",
+                    Options = {"1", "2", "3", "4"},
+                    Max = 9e9, -- Max values you can select
+                    Default = {"1", "2"}
+                }
+            )
+        end
+    end
+
+	-- // Settings
+	local Config = Menu:Page({Name = "Settings"}) do
+		local Menu = Config:Section({Name = "Menu", Size = 120})
+		local Cfgs = Config:Section({Name = "Configs", Size = 200, Side = "Right"})
+		--
+		local abc = false 
+		Menu:Keybind({Name = "Menu key", Flag = "MenuKey", Default = Enum.KeyCode.End, Mode = "Toggle", Callback = function() abc = not abc Library:SetOpen(abc) end})
+		Menu:Dropdown({Name = "Notification Position", Flag = "Notification Position", Options = {"Top Left", "Middle"}, Default = "Top Left"})
+		Menu:Label({Centered = true, Name = "Credits: \nPortal : User Interface"})
+		--
+		local CFGList = Cfgs:Dropdown({Name = "Cfg List", Flag = "SettingConfigurationList", Options = {}})
+		Cfgs:Textbox({Flag = "SettingsConfigurationName", Placeholder = "Config name"})
+		--
+		local CurrentList = {};
+		if not isfolder("Lunar") then 
+			makefolder("Lunar")
+		end 
+		if not isfolder("Lunar/Configs") then 
+			makefolder("Lunar/Configs")
+		end 
+		local function UpdateConfigList()
+			local List = {};
+			for idx, file in ipairs(listfiles("Lunar/Configs")) do
+				local FileName = file:gsub("Lunar/Configs\\", ""):gsub(".cfg", "")
+				List[#List + 1] = FileName;
+			end;
+
+			local IsNew = #List ~= #CurrentList
+			if not IsNew then
+				for idx, file in ipairs(List) do
+					if file ~= CurrentList[idx] then
+						IsNew = true;
+						break;
+					end;
+				end;
+			end;
+
+			if IsNew then
+				CurrentList = List;
+				CFGList:Refresh(CurrentList);
+			end;
+		end;
+		--
+		Cfgs:Button({Name = "Create", Callback = function()
+			local ConfigName = flags.SettingsConfigurationName;
+			if ConfigName == "" or isfile("Lunar/Configs/" .. ConfigName .. ".cfg") then
+				return;
+			end;
+			writefile("Lunar/Configs/" .. ConfigName .. ".cfg", Library:GetConfig());
+			UpdateConfigList();
+		end})
+		Cfgs:Button({Name = "Save", Callback = function()
+			local SelectedConfig = flags.SettingConfigurationList;
+			if SelectedConfig then
+				writefile("Lunar/Configs/" .. SelectedConfig .. ".cfg", Library:GetConfig())
+			end;
+		end})
+		Cfgs:Button({Name = "Load", Callback = function()
+			local SelectedConfig = flags.SettingConfigurationList;
+			if SelectedConfig then
+				Library:LoadConfig(readfile("Lunar/Configs/" .. SelectedConfig .. ".cfg"))
+			end
+		end})
+		Cfgs:Button({Name = "Delete", Callback = function()
+			local SelectedConfig = flags.SettingConfigurationList;
+			if SelectedConfig then
+				delfile("Lunar/Configs/" .. SelectedConfig .. ".cfg")
+			end
+			UpdateConfigList();
+		end})
+		Cfgs:Button({Name = "Refresh", Callback = function()
+			UpdateConfigList();
+		end})
+		Cfgs:Toggle({Name = "Keybind List", Flag = "Keybind List", Callback = function(Bool)
+			PlaceHolderUI.Enabled = Bool
+		end})
+		UpdateConfigList();
+	end
+end 
+
+for i = 1, 10 do 
+    task.wait(0.1)
+    Library:Notification("Example Notification", 3, Library.Accent, flags["Notification Position"])
+end
