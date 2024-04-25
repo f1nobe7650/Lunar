@@ -1,67 +1,57 @@
--- coded by @finobe or something 
+local FINOBE_KEYBIND = "X"
 
-getgenv().Desync = true
-local a = CFrame.new
-local b = game.Players.LocalPlayer
-local c = 0.5
-local d = "X"
-local e = game:GetService("UserInputService")
-local f; 
+getgenv().Finobe1 = true 
+local NewCFrame = CFrame.new
+local LocalFinobe = game.Players.LocalPlayer
+local InputService = game:GetService("UserInputService")
+local Runfinobe = game:GetService("RunService")
 
-game:GetService("RunService").heartbeat:Connect(
-    function()
-        if b.Character then
-            local g = b.Character.HumanoidRootPart
-            local h = g.CFrame * a(9e9, 0 / 0, math.huge)
-            if getgenv().Desync then
-                f = b.Character.HumanoidRootPart.CFrame
-                b.Character.HumanoidRootPart.CFrame = h
-                game:GetService("RunService").RenderStepped:Wait()
-                b.Character.HumanoidRootPart.CFrame = f
+local Finobe2; 
+Runfinobe.heartbeat:Connect(function()
+    if LocalFinobe.Character then 
+        local FinobeChar = LocalFinobe.Character.HumanoidRootPart
+        local Offset = FinobeChar.CFrame * NewCFrame(9e9, 0/0, math.huge)
+        
+        if getgenv().Finobe1 then 
+            Finobe2 = FinobeChar.CFrame
+            FinobeChar.CFrame = Offset
+            Runfinobe.RenderStepped:Wait()
+            FinobeChar.CFrame = Finobe2
+        end 
+    end 
+end)
+
+InputService.InputBegan:Connect(function(sigma)
+    if sigma.KeyCode == Enum.KeyCode[FINOBE_KEYBIND] then 
+        getgenv().Finobe1 = not getgenv().Finobe1
+        
+        if not Finobe1 then 
+            LocalFinobe.Character.HumanoidRootPart.CFrame = Finobe2
+            -- 
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Destroy Cheaters";
+                Text = "Disabled";
+            })
+        else 
+            Finobe2 = nil 
+            -- 
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Destroy Cheaters";
+                Text = "Enabled";
+            })
+        end 
+    end 
+end)    
+
+local finobeHookSigmaChatWtfCreateRemindedMeAboutThisShittyAssExploitBtw_MiseryOwnerIsACuck
+finobeHookSigmaChatWtfCreateRemindedMeAboutThisShittyAssExploitBtw_MiseryOwnerIsACuck = hookmetamethod(game, "__index", newcclosure(function(self, key)
+    if not checkcaller() then
+        if key == "CFrame" and getgenv().Finobe1 and LocalFinobe.Character and LocalFinobe.Character:FindFirstChild("HumanoidRootPart") and LocalFinobe.Character:FindFirstChild("Humanoid") and LocalFinobe.Character:FindFirstChild("Humanoid").Health > 0 then
+            if self == LocalFinobe.Character.HumanoidRootPart and Finobe2 ~= nil then
+                return Finobe2
             end
         end
     end
-)
-e.InputBegan:Connect(
-    function(i)
-        if i.KeyCode == Enum.KeyCode[d] then
-            getgenv().Desync = not getgenv().Desync
-            if not Desync then
-                b.Character.HumanoidRootPart.CFrame = f
-                game:GetService("StarterGui"):SetCore(
-                    "SendNotification",
-                    {Title = "Destroy Cheaters", Text = "Disabled"}
-                )
-            else
-                f = nil
-                game:GetService("StarterGui"):SetCore(
-                    "SendNotification",
-                    {Title = "Destroy Cheaters", Text = "Enabled"}
-                )
-            end
-        end
-    end
-)
-local j
-j =
-    hookmetamethod(
-    game,
-    "__index",
-    newcclosure(
-        function(self, k)
-            if not checkcaller() then
-                if
-                    k == "CFrame" and getgenv().Desync and b.Character and
-                        b.Character:FindFirstChild("HumanoidRootPart") and
-                        b.Character:FindFirstChild("Humanoid") and
-                        b.Character:FindFirstChild("Humanoid").Health > 0
-                 then
-                    if self == b.Character.HumanoidRootPart and f ~= nil then
-                        return f
-                    end
-                end
-            end
-            return j(self, k)
-        end
-    )
-)
+    -- 
+    return finobeHookSigmaChatWtfCreateRemindedMeAboutThisShittyAssExploitBtw_MiseryOwnerIsACuck(self, key)
+end))
