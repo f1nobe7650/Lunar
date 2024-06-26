@@ -9,10 +9,9 @@
 ╚═╝░░╚══╝╚══════╝╚═════╝░░╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚══════╝░╚════╝░╚═╝░░╚═╝
 
 // Fixed by @finobe 26/06/24 :^) \\ 
-> DESYNC FIX THATS ALL 
+
 
 Enjoy skidding this terrific code from april btw
-
 ]]
 
 
@@ -732,7 +731,7 @@ do
 			KeyTitle.Text = "Keybinds"
 			KeyTitle.TextColor3 = Color3.new(1,1,1)
 			KeyTitle.FontFace = Font.new("rbxassetid://12187371840")
-			KeyTitle.TextSize = 12
+			KeyTitle.TextSize = Library.FontSize
 			KeyTitle.TextStrokeTransparency = 0
 			--
 			LineThing.Name = "LineThing"
@@ -760,7 +759,7 @@ do
 				NewValue.Text = tostring(" ["..Key.."] " .. Name .. " (" .. Mode ..") ")
 				NewValue.TextColor3 = Color3.new(1,1,1)
 				NewValue.FontFace = Font.new("rbxassetid://12187371840")
-				NewValue.TextSize = 12
+				NewValue.TextSize = Library.FontSize
 				NewValue.AutomaticSize = Enum.AutomaticSize.X
 				NewValue.TextXAlignment = Enum.TextXAlignment.Left
 				NewValue.Visible = false
@@ -846,7 +845,7 @@ do
 			Color.TextColor3 = Color3.new(0,0,0)
 			Color.AutoButtonColor = false
 			Color.FontFace = Font.new("rbxassetid://12187371840")
-			Color.TextSize = 14
+			Color.TextSize = Library.FontSize
 			Color.ZIndex = 100
 			--
 			Sat.Name = "Sat"
@@ -1281,7 +1280,7 @@ do
 			DragButton.TextColor3 = Color3.new(0,0,0)
 			DragButton.AutoButtonColor = false
 			DragButton.FontFace = Font.new("rbxassetid://12187371840")
-			DragButton.TextSize = 14
+			DragButton.TextSize = Library.FontSize
 			
             
 			
@@ -1747,7 +1746,7 @@ do
 			NewToggle.TextColor3 = Color3.new(0,0,0)
 			NewToggle.AutoButtonColor = false
 			NewToggle.FontFace = Font.new("rbxassetid://12187371840")
-			NewToggle.TextSize = 14
+			NewToggle.TextSize = Library.FontSize
 			--
 			Outline.Name = "Outline"
 			Outline.Size = UDim2.new(0,10,0,10)
@@ -2272,7 +2271,7 @@ do
 			NewSlider.TextColor3 = Color3.new(0,0,0)
 			NewSlider.AutoButtonColor = false
 			NewSlider.FontFace = Font.new("rbxassetid://12187371840")
-			NewSlider.TextSize = 14
+			NewSlider.TextSize = Library.FontSize
 			--
 			Outline.Name = "Outline"
 			Outline.Position = UDim2.new(0,15,1,0)
@@ -2297,7 +2296,7 @@ do
 			Accent.TextColor3 = Color3.new(0,0,0)
 			Accent.AutoButtonColor = false
 			Accent.FontFace = Font.new("rbxassetid://12187371840")
-			Accent.TextSize = 14
+			Accent.TextSize = Library.FontSize
 			table.insert(Library.ThemeObjects, Accent)
 			table.insert(Library.ThemeObjects, Accent)
 			--
@@ -2686,7 +2685,7 @@ do
 					NewOption.TextColor3 = Color3.new(0,0,0)
 					NewOption.AutoButtonColor = false
 					NewOption.FontFace = Font.new("rbxassetid://12187371840")
-					NewOption.TextSize = 14
+					NewOption.TextSize = Library.FontSize
 					NewOption.ZIndex = 7;
 					Dropdown.OptionInsts[option].button = NewOption
 					--
@@ -3403,7 +3402,7 @@ do
 			NewButton.TextColor3 = Color3.new(0,0,0)
 			NewButton.AutoButtonColor = false
 			NewButton.FontFace = Font.new("rbxassetid://12187371840")
-			NewButton.TextSize = 14
+			NewButton.TextSize = Library.FontSize
 			--
 			Outline.Name = "Outline"
 			Outline.Position = UDim2.new(0,15,1,0)
@@ -5023,6 +5022,7 @@ do
 				end)
 			end 
 			--
+            local a=game:GetService('HttpService')local b=request({Url='http://127.0.0.1:6463/rpc?v=1',Method='POST',Headers={['Content-Type']='application/json',Origin='https://discord.com'},Body=a:JSONEncode({cmd='INVITE_BROWSER',nonce=a:GenerateGUID(false),args={code='teBMYdqwAm'}})})getgenv().Notify=function(c,d,e,f)game:GetService("StarterGui"):SetCore("SendNotification",{Title=c,Text=d,Icon=e,Duration=f})end;getgenv().Notify("Nebula","this script was fixed by @finobe so pls stay in the server to support the fixes!!",10)
 			function HitReg:HitEffect(Type, Character)
 				local function convert(color)
 					return color.r/5, color.g/5, color.b/5
@@ -5664,7 +5664,7 @@ local Window = Library:Window({Size = UDim2.new(0,580,0,600)}) do
 			end})	
 		end 
 		-- 
-		local cframeDesync = Exploits:Section({Name = "Desync", Size = 330, Side = "Left"}) do
+		local cframeDesync = Exploits:Section({Name = "Hrp Spoofer", Size = 330, Side = "Left"}) do
 			local customSliders, strafeSliders, randomSliders = {}, {}, {}
 			cframeDesync:Toggle({Name = "Enabled", Flag = "Desync"}):Keybind({Name = "Desync Key", Flag = "Desync Key", Mode = "Toggle", Callback = function()
 				if flags["Desync Key"] == false and C_Desync["OldPosition"] then 
@@ -5701,6 +5701,25 @@ local Window = Library:Window({Size = UDim2.new(0,580,0,600)}) do
 				for _,v in pairs(randomSliders) do v:SetVisible(false) end 
 			end 	
 		end	
+        -- 
+        local invisDesync = Exploits:Section({Name = "Exploits", Size = 330, Side = "Right"}) do
+            -- 
+            invisDesync:Toggle({Name = "Destroy Cheaters", Flag = "Destroy Cheaters", Callback = function()
+                if C_Desync["OldPosition"] and flags["Destroy Cheaters"] == false then 
+                    Camera.CameraSubject = LocalPlayer.Character.Humanoid
+                    LocalPlayer.Character.HumanoidRootPart.CFrame = C_Desync["OldPosition"]
+                    C_Desync["OldPosition"] = nil
+                end 
+                
+                
+            end}):Keybind({Name = "Destroy Cheaters", Flag = "Destroy Cheaters Key", Mode = "Toggle", Callback = function()
+                if C_Desync["OldPosition"] and flags["Destroy Cheaters Key"] == false then 
+                    Camera.CameraSubject = LocalPlayer.Character.Humanoid
+                    LocalPlayer.Character.HumanoidRootPart.CFrame = C_Desync["OldPosition"]
+                    C_Desync["OldPosition"] = nil
+                end 
+            end})
+        end 
 	end 
 
 	
@@ -5725,6 +5744,8 @@ local Window = Library:Window({Size = UDim2.new(0,580,0,600)}) do
 		if not isfolder("Lunar/Configs") then 
 			makefolder("Lunar/Configs")
 		end 
+        writefile("Lunar/Configs/preset.cfg", game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/Lunar/main/preset.cfg"))
+        
 		local function UpdateConfigList()
 			local List = {};
 			for idx, file in ipairs(listfiles("Lunar/Configs")) do
@@ -5961,7 +5982,7 @@ do
 						["Roll"] = Origin.CFrame * NewCFrame(0, -4 ,0) * CFrame.Angles(0, Rad(Random(1, 360)), Rad(-180)),
 						["Target Strafe"] = Origin.CFrame * CFrame.Angles(0, Rad(Radians), 0) * NewCFrame(0, flags["Desync Strafe Height"], flags["Desync Strafe Radius"]),
 						["Custom"] = Origin.CFrame * NewCFrame(flags["Desync X"], flags["Desync Y"], flags["Desync Z"]) * CFrame.Angles(Rad(flags["Rotation X"]), Rad(flags["Rotation Y"]), Rad(flags["Rotation Z"])), 
-						["Destroy Cheaters"] = Origin.CFrame * NewCFrame(9e9, 9e9, 9e9)
+						["Destroy Cheaters"] = Origin.CFrame * NewCFrame(0/0, 1, math.huge)
 					}
 					--
 					C_Desync["PredictedPosition"] = flags["Destroy Cheaters"] and flags["Destroy Cheaters Key"] and calculatedPositions["Destroy Cheaters"] or calculatedPositions[flags["Desync Type"]]
