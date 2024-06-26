@@ -8,12 +8,11 @@
 ██║░╚███║███████╗██████╦╝╚██████╔╝███████╗██║░░██║██╗░░░██║░░░███████╗╚█████╔╝██║░░██║
 ╚═╝░░╚══╝╚══════╝╚═════╝░░╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚══════╝░╚════╝░╚═╝░░╚═╝
 
-// Fixed by @finobe 28/05/24 :^) \\ 
-
+// Fixed by @finobe 26/06/24 :^) \\ 
+> DESYNC FIX THATS ALL 
 
 Enjoy skidding this terrific code from april btw
 
-fixed target aim blah blah
 ]]
 
 
@@ -396,6 +395,14 @@ utility.folders["Hit Chams"] = Instance.new("Folder", Workspace);
 Library.__index = Library;
 Library.Pages.__index = Library.Pages;
 Library.Sections.__index = Library.Sections;
+
+local desync_setback = Instance.new("Part")
+desync_setback.Name = "Actryn skid noob";
+desync_setback.Parent = ws;
+desync_setback.Size = LocalPlayer.Character.Humanoid.RootPart.Size;
+desync_setback.CanCollide = false; 
+desync_setback.Anchored = true; 
+desync_setback.Transparency = 1; 
 
 -- // Functions
 do 
@@ -5663,6 +5670,7 @@ local Window = Library:Window({Size = UDim2.new(0,580,0,600)}) do
 				if flags["Desync Key"] == false and C_Desync["OldPosition"] then 
 					LocalPlayer.Character.HumanoidRootPart.CFrame = C_Desync["OldPosition"]
 					C_Desync["OldPosition"] = nil 
+                    Camera.CameraSubject = LocalPlayer.Character.Humanoid
 				end 
 			end}) 
 			local Vis = cframeDesync:Toggle({Name = "Visualize", Flag = "Desync Visualize"}); Vis:Colorpicker({Default = Color3.fromRGB(0,0,0), Flag = "Desync Visualize Outline", Alpha = 0}); Vis:Colorpicker({Default = Color3.fromHex("#7D0DC3"), Flag = "Desync Visualize Fill", Alpha = 0.7});
@@ -5969,9 +5977,11 @@ do
 					end  		
 					-- 
 					game:GetService("RunService").RenderStepped:Wait()
+                    -- 
+                    desync_setback.Position = C_Desync["OldPosition"].Position + Vector3.new(0, 2, 0)
+                    -- 
+                    Camera.CameraSubject = desync_setback
 					-- 
-					print((LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
-					-- 	
 					LocalPlayer.Character.HumanoidRootPart.CFrame = C_Desync["OldPosition"]
 					--
 					framework:cframeSpeed() 
