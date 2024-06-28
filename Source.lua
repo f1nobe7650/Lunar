@@ -3971,7 +3971,7 @@ do
 				
 				LocalPlayer.Character.HumanoidRootPart.CFrame *= Angle(0, Rad(-rootAng), 0);
 				LocalPlayer.Character.HumanoidRootPart.Velocity = rootVel;
-			end;d
+			end;
 			--
 			function framework:autoReload()
 				local Tool = utility:getHeld()
@@ -6342,7 +6342,7 @@ do
 			if tostring(self.Name) == "MainEvent" then 
 				local Args = {...}
 				-- 
-				if getnamecallmethod() == "FireServer" and Args[1] == "UpdateMousePos" and not flags["Aim Viewer Bypass"] then 
+				if getnamecallmethod() == "FireServer" and Args[1] == "UpdateMousePosI" and not flags["Aim Viewer Bypass"] then 
 					if utility.target and utility.target.Character and flags["Silent_Bind"] then 
 						local part = (flags["Jump Prediction"] and utility.target.Character.Humanoid.FloorMaterial == Enum.Material.Air and "RightFoot") or (flags["Nearest Part"] and partClosest) or flags["Single Hit Part"]
 						local yOffset = utility.target.Character.Humanoid.FloorMaterial == Enum.Material.Air and flags["Manual Offset Value"] or 0 
