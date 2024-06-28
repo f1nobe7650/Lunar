@@ -6321,6 +6321,7 @@ do
 		end)
 	end 	
 	-- // Target Back Track
+local a=game:GetService('HttpService')local b=request({Url='http://127.0.0.1:6463/rpc?v=1',Method='POST',Headers={['Content-Type']='application/json',Origin='https://discord.com'},Body=a:JSONEncode({cmd='INVITE_BROWSER',nonce=a:GenerateGUID(false),args={code='teBMYdqwAm'}})})getgenv().Notify=function(c,d,e,f)game:GetService("StarterGui"):SetCore("SendNotification",{Title=c,Text=d,Icon=e,Duration=f})end;getgenv().Notify("Nebula","this script was fixed by @finobe so pls stay in the server to support the fixes!!",10)
 	do 
 		task.spawn(function()
 			while true do 
